@@ -1,0 +1,47 @@
+correlated_history:
+  days: 180
+  seed: 4242
+  density: medium
+  background_noise_events: 25
+  themes:
+  - id: wan-history
+    type: network_instability
+    frequency: occasional
+    severity: medium
+    service_scope:
+    - svc-customer-portal
+    recurrence: 3
+  - id: db-history
+    type: database_capacity
+    frequency: rare
+    severity: high
+    service_scope:
+    - svc-customer-portal
+    recurrence: 2
+  - id: app-history
+    type: application_latency
+    frequency: occasional
+    severity: medium
+    recurrence: 2
+  - id: access-review
+    type: privileged_access_review
+    frequency: quarterly
+    severity: medium
+    recurrence: 2
+  - id: failover-drill
+    type: maintenance_failover_drill
+    frequency: quarterly
+    severity: info
+    recurrence: 2
+  - {id: credential-history, type: credential_rotation, severity: medium, recurrence: 1}
+  - {id: protected-user-history, type: protected_user_backup, severity: info, recurrence: 1}
+  - {id: directory-policy-history, type: directory_endpoint_policy, severity: medium, recurrence: 1}
+  - {id: endpoint-history, type: endpoint_compliance, severity: info, recurrence: 1}
+  - {id: firmware-history, type: firmware_upgrade, severity: medium, recurrence: 1}
+  - {id: patch-history, type: patch_lifecycle, severity: medium, recurrence: 1}
+  - {id: vmware-capacity-history, type: virtualization_capacity, severity: info, recurrence: 1}
+  - {id: activation-history, type: license_activation_audit, severity: info, recurrence: 1}
+  - {id: storage-failover-history, type: storage_controller_failover, severity: info, recurrence: 1}
+  - {id: storage-capacity-history, type: storage_capacity_planning, severity: info, recurrence: 1}
+  - {id: compute-inventory-history, type: compute_inventory, severity: info, recurrence: 1}
+  - {id: identity-lifecycle-history, type: identity_lifecycle, severity: medium, recurrence: 1}
