@@ -1,0 +1,101 @@
+enterprise_requirements:
+  id: small-enterprise-generated-v1
+  name: Aizen Small Enterprise Generated World
+  version: 1.0.0
+  employee_count: 150
+  industry: technology_services
+  seed: 4242
+  sites:
+  - id: site-hq
+    name: San Francisco HQ
+    kind: office
+    region: us-west
+    users: 100
+  - id: site-branch
+    name: Austin Branch
+    kind: office
+    region: us-central
+    users: 50
+  services:
+  - id: customer-portal
+    name: Customer Portal
+    criticality: critical
+    deployment: kubernetes
+    database: true
+  - id: employee-portal
+    name: Employee Portal
+    criticality: medium
+    deployment: vm
+    database: false
+  - id: billing
+    name: Finance & Billing
+    criticality: high
+    deployment: kubernetes
+    database: true
+  network:
+    redundant_wan: true
+    firewall: true
+    core_switch: true
+    default_link_mbps: 1000
+  kubernetes:
+    enabled: true
+    nodes: 3
+    region: us-west-2
+  databases:
+    engine: postgresql
+    clusters: 2
+    replicas_per_cluster: 1
+  identity:
+    enabled: true
+    provider_type: corporate_idp
+    representative_users: 8
+    guest_users: 2
+    service_accounts: 2
+    privileged_roles:
+    - global_admin
+    - network_admin
+    - security_reviewer
+    - database_admin
+  itsm:
+    enabled: true
+    seed_incidents: 5
+    seed_changes: 3
+    knowledge_articles: 4
+  compute:
+    enabled: true
+    hosts:
+    - {id: aix-ops-01, name: AIX Operations Host, platform: physical, os_family: aix, os_version: '7.3', firmware_version: '1.0', cpu_cores: 16, memory_gb: 64, storage_gb: 800}
+    - {id: linux-app-01, name: Linux Application Host, platform: virtual, os_family: linux, os_version: '9.4', firmware_version: '1.0', cpu_cores: 8, memory_gb: 32, storage_gb: 400}
+    - {id: windows-mgmt-01, name: Windows Management Host, platform: virtual, os_family: windows, os_version: '2022', firmware_version: '1.0', cpu_cores: 8, memory_gb: 32, storage_gb: 400}
+    - {id: esxi-01, name: ESXi Host 01, platform: physical, os_family: esxi, os_version: '8.0', firmware_version: '1.0', cpu_cores: 32, memory_gb: 256, storage_gb: 4000}
+    - {id: esxi-02, name: ESXi Host 02, platform: physical, os_family: esxi, os_version: '8.0', firmware_version: '1.0', cpu_cores: 32, memory_gb: 256, storage_gb: 4000}
+  monitoring: {enabled: true, source: enterprise-monitoring, freshness_hours: 24}
+  backup: {enabled: true, provider: druva, retention_days: 35}
+  credentials: {enabled: true, retirement_policy: after_dependents_verified}
+  directory: {enabled: true, domain: example.test}
+  endpoint: {enabled: true, observation_source: intune}
+  lifecycle: {enabled: true, generate_catalogs: true}
+  virtualization: {enabled: true, manager: vcenter, reserve_largest_host: true}
+  licensing: {enabled: true, source: vamt, channel: volume_kms}
+  storage: {enabled: true, raw_capacity_gb: 40000, usable_capacity_gb: 30000}
+  sop_verification: {enabled: true, target_use_cases: 61, qualification_level: L2}
+  assurance_fixtures:
+  - type: privileged_guest_assignment
+    subject: guest-01
+    role: role-global-admin
+  sop_coverage:
+  - privileged_access_review
+  - wan_failover
+  - network_capacity
+  - database_restore
+  - kubernetes_incident
+  - itsm_incident_triage
+  - compute_inventory_and_monitoring
+  - protected_user_backup
+  - credential_rotation
+  - directory_endpoint_policy
+  - firmware_and_patch_lifecycle
+  - virtualization_capacity
+  - license_activation_audit
+  - storage_controller_failover
+  - storage_capacity_planning
